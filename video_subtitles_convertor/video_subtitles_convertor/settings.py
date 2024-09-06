@@ -10,6 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+
+# from python-decouple library
+from decouple import config, Csv
+
+
+
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,12 +26,22 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-ojm5s(l^*1i5@w!90++_lqrgr(^m&wmihukpv7835&cqp4kzq1'
+SECRET_KEY = config('SECRET_KEY')
+
+# ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
+DEBUG = config('DEBUG', default=False, cast=bool)
+
+
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', 
+                       cast=Csv())
+
+CSRF_TRUSTED_ORIGINS = ['https://' + host for host in config('ALLOWED_HOSTS', cast=Csv())]
+
+
+
 
 
 # Application definition
@@ -40,6 +56,9 @@ INSTALLED_APPS = [
     
     # Our Application
     'mainapp',
+    
+    # Decouple configuration data from our project
+    'decouple'
 ]
 
 MIDDLEWARE = [
@@ -77,12 +96,15 @@ WSGI_APPLICATION = 'video_subtitles_convertor.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    'default':{
+        'ENGINE':config('DB_ENGINE'),
+        'NAME':config('DB_NAME'),
+        'USER':config('DB_USER'),
+        'PASSWORD':config('DB_PASSWORD'),
+        'host':config('DB_HOST'),
+        'port':config('DB_PORT')
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -124,3 +146,16 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Celery Configurations
+CELERY_BROKER_URL = config('CELERY_BROKER_URL') 
+CELERY_ACCEPT_CONTENT = config('CELERY_ACCEPT_CONTENT',cast=Csv())
+CELERY_RESULT_SERIALIZER = config('CELERY_RESULT_SERIALIZER')
+CELERY_TASK_SERIALIZER = config('CELERY_TASK_SERIALIZER') 
+CELERY_TIMEZONE = config('CELERY_TIMEZONE') 
+
+
+# Celery beat and backend configurations
+CELERY_RESULT_BACKEND = "django-db"
+CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
