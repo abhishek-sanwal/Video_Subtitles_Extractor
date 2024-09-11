@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+<!-- Customize body -->
+
+{% block body %}
+
+<div style="margin: 100px auto; background-color: #f7f7f7">
+  <h2 style="text-align: center">
+    You have been logged out from this app. Please login again to use this app
+    <a
+      href="{% url 'authy:login' %}"
+      style="
+        text-decoration: none;
+        text-align: center;
+        padding: 5px;
+        display: block;
+      "
+    >
+      Login
+    </a>
+  </h2>
+</div>
+
+{% endblock %}

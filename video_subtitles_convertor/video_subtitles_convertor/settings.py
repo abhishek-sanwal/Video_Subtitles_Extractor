@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     
     # Our Application
     'mainapp',
+    'authy',
     
     # Decouple configuration data from our project
     'decouple'
@@ -145,7 +146,8 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
+LOGIN_URL = "authy:login"
+LOGIN_REDIRECT_URL="authy:home"
 # Setting Media Configurations
 MEDIA_URL = '/videos/'
 MEDIA_ROOT = os.path.join(BASE_DIR,"videos")

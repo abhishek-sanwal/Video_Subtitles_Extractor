@@ -1,0 +1,19 @@
+<!-- Extend base html file -->
+{% extends 'authy/base.html' %}
+
+<!--  Load static files -->
+{% load static %}
+
+<!-- Customize body of html -->
+{% block body %}
+
+<form method="post">
+  <!-- Add csrf token -->
+  {% csrf_token %}
+  <!-- Render Form -->
+  {{ form.as_p }}
+  <!--  -->
+  <button type="submit">Signup With Us</button>
+</form>
+
+{% endblock %}
