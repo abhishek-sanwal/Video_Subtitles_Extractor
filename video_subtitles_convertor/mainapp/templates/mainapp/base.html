@@ -1,0 +1,25 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width initial-scale=1.0" />
+    <meta name="keywords" content="ffmpeg Video Subtitles" />
+    <meta name="author" content="Abhishek Sanwal" />
+    <meta name="topic" content="Fatmug Assignment Submission" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="{% static 'authy/ytcss/style.css' %}" />
+    <title>
+      <!-- Customize head of document --> {% block title %} {% endblock %}
+    </title>
+  </head>
+
+  <body>
+    <!-- Customize body of html -->
+    {% block body %} {% endblock %}
+
+    <!-- Customize JS -->
+    {% block js %} {% endblock %}
+  </body>
+</html>
