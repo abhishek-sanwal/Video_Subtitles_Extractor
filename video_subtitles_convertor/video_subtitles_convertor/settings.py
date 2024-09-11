@@ -13,8 +13,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 # from python-decouple library
 from decouple import config, Csv
-
-
+import os
 
 from pathlib import Path
 
@@ -147,6 +146,9 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Setting Media Configurations
+MEDIA_URL = '/videos/'
+MEDIA_ROOT = os.path.join(BASE_DIR,"videos")
 
 # Celery Configurations
 CELERY_BROKER_URL = config('CELERY_BROKER_URL') 
