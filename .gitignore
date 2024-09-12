@@ -1,0 +1,42 @@
+
+# Environment Files
+.env
+
+# Cache files
+__pycache__
+*/__pycache__
+*/*/__pycache__
+
+
+# Migrations files
+migrations
+*/migrations
+*/*/migrations
+
+# DB Configuration file
+db.sqlite3
+
+# Mac  files
+.DS_Store
+*/.DS_Store
+*/*/.DS_Store
+
+
+# Vim editor temp file
+*.swp
+*.swo
+/*/*.swp
+/*/*/*.swp
+
+
+# Redis files
+*.rdb
+/*/*.rdb
+/*/*/*.rdb
+
+
+# Assests
+
+assets/
+*/assets/
+*/*/assets/
