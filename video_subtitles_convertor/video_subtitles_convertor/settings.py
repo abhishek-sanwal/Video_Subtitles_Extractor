@@ -149,7 +149,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = "authy:login"
 LOGIN_REDIRECT_URL="authy:home"
 # Setting Media Configurations
-MEDIA_URL = '/media/'
+MEDIA_URL = '/assets/'
 MEDIA_ROOT = os.path.join(BASE_DIR,"assets")
 
 # Celery Configurations

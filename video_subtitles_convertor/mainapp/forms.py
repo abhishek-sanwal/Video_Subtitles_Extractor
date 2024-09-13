@@ -8,4 +8,4 @@ class UploadVideoForm(forms.ModelForm):
     class Meta:
         
         model  = Video
-        fields = ["video_name","video_file"]
+        fields = ["video_file"]

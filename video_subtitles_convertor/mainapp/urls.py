@@ -3,7 +3,7 @@ from django.urls import path
 
 from .views import UploadVideo, ListVideos
 
-app_name = "authapp"
+app_name = "mainapp"
 
 urlpatterns = [
     path("upload-video", UploadVideo.as_view(), name="upload-video"),

@@ -1,21 +1,21 @@
 from django.db import models
 
 # Create your models here.
-
+import uuid
 
 class Video(models.Model):
     
-    video_name = models.CharField(max_length=600,blank=False,null=False)
+    video_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     video_file = models.FileField(upload_to="videos/")
     
     def __str__(self):
         
-        return self.video_name
+        return str(self.video_file)
     
     class Meta:
         
         db_table = "video_info"
-        db_table_comment = " Django Videos Table_DND"
+        db_table_comment = " Django_Videos_Table_DND"
     
     
     
