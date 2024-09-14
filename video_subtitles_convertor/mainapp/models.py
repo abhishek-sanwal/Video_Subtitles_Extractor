@@ -15,23 +15,22 @@ class Video(models.Model):
     class Meta:
         
         db_table = "video_info"
-        db_table_comment = " Django_Videos_Table_DND"
+        db_table_comment = " Django-Videos-Table-DND"
     
     
     
-# class Subtitles(models.Model):
+class Subtitles(models.Model):
     
-#     # video = models.ForeignKey(Video,on_delete=models.CASCADE)
-#     start_time = models.TimeField(auto_now=False,auto_now_add=False)
-#     end_time = models.TimeField(auto_now=False,auto_now_add=False)
-#     phrase = models.CharField(max_length=800)
+    video = models.ForeignKey(Video,on_delete=models.CASCADE)
+    time = models.TimeField(auto_now=False,auto_now_add=False)
+    word = models.CharField(max_length=800)
     
-#     class Meta:
+    class Meta:
         
-#         db_table = "video_subtitles"
-#         db_table_comment = " Django Videos Subtitles Table_DND"
-#         ordering = ["start_time","end_time","phrase"]
+        db_table = "video_subtitles"
+        db_table_comment = " Django-Videos-Subtitles-Table-DND"
+        ordering = ["time","word"]
     
-#     def __str__(self):
+    def __str__(self):
         
-#         return f"{self.video_name} {self.start_time}=>{self.end_time} = {self.phrase}"
+        return f"{self.video} {self.time} = {self.word}"

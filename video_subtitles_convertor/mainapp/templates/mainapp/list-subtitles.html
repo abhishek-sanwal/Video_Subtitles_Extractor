@@ -1,0 +1,80 @@
+{% extends 'mainapp/base.html' %}
+
+<!--  -->
+
+{% block body %}
+
+<form method="get">
+  <!-- Add form -->
+  <input type="search" name="search" />
+  <br />
+  <button type="submit">Search Words</button>
+</form>
+
+{% for subtitles in subtitles_list %}
+<div>
+  <video
+    class="video a{{ subtitles.pk }}"
+    height="400px"
+    width="800px"
+    style="margin-bottom: 50px"
+    controls
+    preload="metadata"
+  >
+    <source src="{{ subtitles.video.video_file.url }}" type="video/mp4" />
+    Your browser doesn't support the video tag.
+  </video>
+  <p>Keyword : {{ subtitles.word }}</p>
+  <p class="a{{ subtitles.pk }}">{{ subtitles.time|time:"H:i:s" }}</p>
+</div>
+<button class=" btn a{{ subtitles.pk }}" class="setvideo">
+  Click me to start video from word time
+</button>
+
+<!-- {% with unique_id="time-"|add:subtitles.pk %} -->
+<!--  -->
+<!-- {{ subtitle.time|json_script:unique_id }} -->
+<!--  -->
+<!-- {% endwith %} -->
+<!-- {{ subtitle.time|
+  json_script:"{{ subtitles.pk }}" }} -->
+
+{% empty %} Search Something in search Bar. {% endfor %}
+<!--  -->
+{% endblock %}
+<!--  -->
+{% block js %}
+
+<script>
+  // Inside Javascript
+
+  const setVideoTime = (event) => {
+    console.log(event.currentTarget, "button triggered");
+    const pk = event.currentTarget.classList[1];
+    console.log(pk);
+    const video = document.querySelector(`video.${pk}`);
+    const time = document.querySelector(`p.${pk}`).textContent;
+    console.log(video, time, typeof time);
+
+    // Destrcuture into hours minutes and seconds in int type;
+    const [hours, minutes, seconds, ...extra] = time
+      .split(":")
+      .map((element) => parseInt(element));
+
+    console.log(hours, minutes, seconds);
+    // Convert hours into seconds and minutes into seconds
+    video.currentTime = hours * 60 * 60 + minutes * 60 + seconds;
+    video.play();
+  };
+
+  document.addEventListener("DOMContentLoaded", () => {
+    console.log("Inside js");
+    const buttonList = document.querySelectorAll(".btn");
+    console.log(buttonList);
+    buttonList.forEach((element) =>
+      element.addEventListener("click", setVideoTime)
+    );
+  });
+</script>
+
+{% endblock %}
