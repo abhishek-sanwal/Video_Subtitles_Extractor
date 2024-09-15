@@ -1,5 +1,5 @@
 
-
+# Custom Exceptions
 class NoSubtitlesException(Exception):
     pass
 
@@ -7,5 +7,6 @@ class NoSubtitlesException(Exception):
 class VideoFileNotFoundException(Exception):
     pass
 
+# Ffmpeg command failed
 class CommandExectionFailed(Exception):
     pass

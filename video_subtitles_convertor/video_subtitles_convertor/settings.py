@@ -41,8 +41,6 @@ CSRF_TRUSTED_ORIGINS = ['https://' + host for host in config('ALLOWED_HOSTS', ca
 
 
 
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -58,7 +56,9 @@ INSTALLED_APPS = [
     'authy',
     
     # Decouple configuration data from our project
-    'decouple'
+    'decouple',
+    # Django Celery tasks 
+    'django_celery_results'
 ]
 
 MIDDLEWARE = [
@@ -76,7 +76,7 @@ ROOT_URLCONF = 'video_subtitles_convertor.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,"templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -146,6 +146,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 LOGIN_URL = "authy:login"
 LOGIN_REDIRECT_URL="authy:home"
 # Setting Media Configurations

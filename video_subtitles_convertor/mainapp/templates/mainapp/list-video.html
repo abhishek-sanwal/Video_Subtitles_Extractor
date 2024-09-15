@@ -1,0 +1,32 @@
+<!-- Extend base html file -->
+{% extends 'mainapp/base.html' %}
+
+<!-- Customize title -->
+
+{% block title %}
+
+<!-- Title -->
+Videos List
+<!-- End title -->
+
+{% endblock %}
+
+<!-- Customize body -->
+{% block body %}
+
+<!-- Unordered list -->
+<ul>
+  <!-- Render each video -->
+  {% for video in videos %}
+
+  <!-- Render Video url -->
+  <li>{{ video.video_file.url }}</li>
+</ul>
+<!-- If no items -->
+{% empty %}
+<p>NO Content Yet</p>
+<!-- End for loop -->
+{% endfor %}
+
+<!-- End block -->
+{% endblock %}

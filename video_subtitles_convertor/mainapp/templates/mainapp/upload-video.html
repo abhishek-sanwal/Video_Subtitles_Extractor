@@ -1,15 +1,25 @@
+<!-- Extend Base html file -->
 {% extends 'mainapp/base.html' %}
 
+<!-- Customize Title  -->
+{% block title %}
 <!--  -->
+Upload video
+<!--  -->
+
+{% endblock %}
+
+<!-- Customize Body -->
 {% block body %}
 
 <form method="post" enctype="multipart/form-data">
-  <!--  -->
+  <!-- Inject Cross site request foregory token -->
   {% csrf_token %}
-  <!--  -->
+  <!--  Render form as p tags -->
   {{ form.as_p }}
-  <!--  -->
+  <!-- Add a button to submit data -->
   <button type="submit">Upload</button>
 </form>
 
+<!-- Endblock tag -->
 {% endblock %}

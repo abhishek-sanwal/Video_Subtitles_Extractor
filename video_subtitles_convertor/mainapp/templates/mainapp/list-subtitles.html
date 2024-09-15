@@ -1,16 +1,31 @@
-{% extends 'mainapp/base.html' %}
-
+<!-- Extend base html file -->
+<!-- Load custom filters -->
+{% extends 'mainapp/base.html' %} {% load custom_filters %}
 <!--  -->
+<!--  -->
+
+<!-- Customize title  -->
+
+{% block title %} Subtitles List
+<!-- end title -->
+
+{% endblock %}
+
+<!-- Customize body -->
 
 {% block body %}
 
+<!-- Render a form to get data -->
+<!-- Paramters will be added in url -->
 <form method="get">
   <!-- Add form -->
   <input type="search" name="search" />
   <br />
+  <!-- A button to get data in backend -->
   <button type="submit">Search Words</button>
 </form>
 
+<!-- Render search results -->
 {% for subtitles in subtitles_list %}
 <div>
   <video
@@ -21,7 +36,9 @@
     controls
     preload="metadata"
   >
-    <source src="{{ subtitles.video.video_file.url }}" type="video/mp4" />
+    <source src="{{ subtitles.video|get_output_url }}" type="video/mp4" />
+    <source src="{{ subtitles.video|get_output_url }}" type="video/webm" />
+    <source src="{{ subtitles.video|get_output_url }}" type="video/ogg" />
     Your browser doesn't support the video tag.
   </video>
   <p>Keyword : {{ subtitles.word }}</p>
@@ -31,23 +48,21 @@
   Click me to start video from word time
 </button>
 
-<!-- {% with unique_id="time-"|add:subtitles.pk %} -->
 <!--  -->
-<!-- {{ subtitle.time|json_script:unique_id }} -->
+{% empty %}
 <!--  -->
-<!-- {% endwith %} -->
-<!-- {{ subtitle.time|
-  json_script:"{{ subtitles.pk }}" }} -->
-
-{% empty %} Search Something in search Bar. {% endfor %}
-<!--  -->
+Search Something in search Bar.
+<!-- End for tag -->
+{% endfor %}
+<!-- end body block  -->
 {% endblock %}
-<!--  -->
+<!-- customize js -->
 {% block js %}
 
 <script>
   // Inside Javascript
 
+  // A function to set video time
   const setVideoTime = (event) => {
     console.log(event.currentTarget, "button triggered");
     const pk = event.currentTarget.classList[1];
@@ -67,10 +82,12 @@
     video.play();
   };
 
+  // Add eventslisteners and run js only after full dom is loaded
   document.addEventListener("DOMContentLoaded", () => {
     console.log("Inside js");
     const buttonList = document.querySelectorAll(".btn");
     console.log(buttonList);
+
     buttonList.forEach((element) =>
       element.addEventListener("click", setVideoTime)
     );

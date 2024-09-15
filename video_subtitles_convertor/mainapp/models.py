@@ -11,6 +11,7 @@ class Video(models.Model):
     def __str__(self):
         
         return str(self.video_file)
+
     
     class Meta:
         
@@ -18,7 +19,7 @@ class Video(models.Model):
         db_table_comment = " Django-Videos-Table-DND"
     
     
-    
+# Video--1 => N ----Subtitles Mapping 
 class Subtitles(models.Model):
     
     video = models.ForeignKey(Video,on_delete=models.CASCADE)

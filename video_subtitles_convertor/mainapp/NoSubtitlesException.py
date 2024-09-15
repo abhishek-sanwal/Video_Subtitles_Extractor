@@ -1,5 +1,0 @@
-
-
-class NoSubtitlesException(Exception):
-    
-    pass
