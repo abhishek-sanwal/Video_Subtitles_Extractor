@@ -2,17 +2,14 @@
 
 from django.db.models.query import QuerySet
 from django.http import HttpResponse
-from django.shortcuts import render
-from django.views.generic import  ListView, View,FormView,vi
-from django.shortcuts import redirect
-from django.db.models import Q
+from django.views.generic import  ListView, FormView
 from django.urls import reverse_lazy
 
 from .models import Video, Subtitles
 from .forms import UploadVideoForm
 from .tasks import process_video
 import uuid
-from typing import List,Any
+from typing import List
 
 
 # Subtitles language codes provided by Ffmpeg(Fast forward multimedia)

@@ -58,7 +58,9 @@ INSTALLED_APPS = [
     # Decouple configuration data from our project
     'decouple',
     # Django Celery tasks 
-    'django_celery_results'
+    'django_celery_results',
+    
+    'django_extensions'
 ]
 
 MIDDLEWARE = [
