@@ -14,3 +14,11 @@ def get_output_url(instance):
     
     return ""
 
+
+@register.filter
+def getFileName(instance):
+    
+    if isinstance(instance, Video):
+        arr = instance.video_file.url.split("/")
+        return instance.video_file.url.split("/")[3]
+
