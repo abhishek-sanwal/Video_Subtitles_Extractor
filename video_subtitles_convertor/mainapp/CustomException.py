@@ -8,5 +8,5 @@ class VideoFileNotFoundException(Exception):
     pass
 
 # Ffmpeg command failed
-class CommandExectionFailed(Exception):
+class CommandExecutionFailed(Exception):
     pass

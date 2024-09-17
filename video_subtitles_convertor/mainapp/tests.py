@@ -72,9 +72,9 @@ class ModelTest(TestCase):
         
         # Assertion for Subtitles model
         self.assertNotEqual(self.subtitle.word,self.word,
-                            " Subtitle word updation")
+                            " Subtitle word update")
         self.assertNotEqual(self.subtitle.time,self.time,
-                            " Subtitle word updation")
+                            " Subtitle word update")
         
         # Restore state for Subtitles Model
         self.subtitle.word = self.word
