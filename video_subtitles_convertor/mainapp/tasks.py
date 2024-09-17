@@ -5,7 +5,7 @@ from .CustomException import NoSubtitlesException, VideoFileNotFoundException
 from typing import List
 import subprocess
 
-# A  lambda function to remove specialcharacters and numbers 
+# A  lambda function to remove special characters and numbers 
 # Case insensitive Search
 removeOtherCharacters = lambda word:"".join([i.lower() for i in word if i.isalpha()])
 
@@ -36,11 +36,9 @@ def checkSubtitlesStreams(input_file: str) -> str:
     except Exception as e:
 
         print(e)
-    # print(cmd_output.stderr)
     return cmd_output.stderr
 
-
-# Check all available subtiltes streams and choose the first
+# Check all available subtitles streams and choose the first
 def getAvailableSubtitles(cmd_output: str) -> str:
 
     # Get each line of output
@@ -54,13 +52,12 @@ def getAvailableSubtitles(cmd_output: str) -> str:
 
         # We are using first subtitles track to put it on video
         # fetch first subtitles track from file
-        if word and word[0] == "Stream" and word.count("(srt)") > 0:
+        if word and word[0] == "Stream" and (word.count("Subtitle:") > 0 or word.count("subtitle") > 0):
 
-            print("stremCode", word[1][1:4])
+            print("streamCode", word[1][1:4])
             streamCode: str = word[1][1:4]
 
             break
-
     return streamCode
 
 
@@ -145,15 +142,16 @@ def saveSubtitlesDb(video_id: int, file_content: str) -> bool:
                     object.save()
     return True
    
-def getVideoObject(video_id:int)->Video:
+def getVideoObject(video_id)->Video:
     
+    video_id = str(video_id)
     video = Video.objects.filter(video_id__iexact=video_id)
     if video:
         return video.first()
     
     return None
 
-# Embed first subttitles track found into videos
+# Embed first subtitles track found into videos
 def encodeVideoSubtitles(input_file: str, subtitles_fileName: str) -> str:
 
     print("Inside function")
@@ -173,6 +171,7 @@ def encodeVideoSubtitles(input_file: str, subtitles_fileName: str) -> str:
 
 def getVideoUrl(video_id:int)->str:
 
+    video_id = str(video_id)
     data:str = Video.objects.filter(video_id__iexact=video_id)
 
     if not data:

@@ -24,9 +24,11 @@ subtitle_language_codes: List[str] = [
 # A helper function to get filePath
 def getVideoUrl(video_id:str)->str:
 
+    video_id = str(video_id)
+    
     data = Video.objects.filter(video_id__iexact=video_id)
-
-    if not data:
+    print(data)
+    if data is None:
         return ""
 
     return data.first().video_file.url
