@@ -1,6 +1,6 @@
 
 import os
-
+import logging
 
 from celery import Celery
 from django.conf import settings
@@ -14,7 +14,7 @@ app = Celery("Subtitles")
 app.conf.enable_utc = False
 
 app.conf.update(timezone= "Asia/Kolkata")
-
+logging.basicConfig(level=logging.DEBUG)
 app.config_from_object(settings, namespace="CELERY")
 
 app.autodiscover_tasks()
