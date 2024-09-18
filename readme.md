@@ -64,7 +64,7 @@ docker-compose down
 
 ### Working Demo
 
-<!-- ![Working Demo](/screenshots/Demo.mp4) -->
+![Working Demo](/screenshots/Demo.mp4)
 
 ---
 
