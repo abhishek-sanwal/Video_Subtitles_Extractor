@@ -10,7 +10,9 @@ def get_output_url(instance)->Union[str,None]:
     
     if isinstance(instance,Video):
         
-        return instance.video_file.url.replace("videos","output-videos")
+        url = instance.video_file.url.replace("videos","output_videos")
+        index = url.rfind("/")
+        return url[:index+1]+ "output-" + url[index+1:]
     
     return ""
 
