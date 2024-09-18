@@ -1,12 +1,12 @@
 
 from django import template
 from ..models import Video
-
+from typing import Union
 register= template.Library()
 
 
 @register.filter
-def get_output_url(instance):
+def get_output_url(instance)->Union[str,None]:
     
     if isinstance(instance,Video):
         
@@ -16,9 +16,9 @@ def get_output_url(instance):
 
 
 @register.filter
-def getFileName(instance):
+def getFileName(url:str)->str:
     
-    if isinstance(instance, Video):
-        arr = instance.video_file.url.split("/")
-        return instance.video_file.url.split("/")[3]
+    arr = url.split("/")
+    return arr[3]
+    
 

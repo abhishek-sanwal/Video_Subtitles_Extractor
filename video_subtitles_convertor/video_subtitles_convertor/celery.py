@@ -19,7 +19,7 @@ app.config_from_object(settings, namespace="CELERY")
 
 app.autodiscover_tasks()
 
-# Bind a debug fucntion 
+# Bind a debug function 
 @app.task(bind=True)
 def debug_task(self):
     

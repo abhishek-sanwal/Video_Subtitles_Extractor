@@ -94,7 +94,7 @@ def parse_srt(subtitles_file:str)->str:
     # Read subtitles file
     with open(subtitles_file, 'r', encoding='utf-8') as file:
         file_content:str = file.read()
-        
+    
     # Remove italic, bold, font tags
     file_content = file_content.replace(r"<i>", "").replace(
             r"</i>", "").replace(r"<b>", "").replace(
@@ -114,6 +114,7 @@ def saveSubtitlesDb(video_id: int, file_content: str) -> bool:
     if not video_id:
         raise VideoFileNotFoundException("Video File not founds")
 
+    lis = list()
     # Read each sentence
     for blocks in file_content:
 
@@ -126,7 +127,7 @@ def saveSubtitlesDb(video_id: int, file_content: str) -> bool:
         number, time, *line = block
         # 00:00:00,500 --> 00:00:02,000
         # Convert time to HH:MM:SS,%f format
-        
+        lis.append(" ".join(line))
         # Skip font tag
         if number == 1:
             continue
@@ -140,15 +141,22 @@ def saveSubtitlesDb(video_id: int, file_content: str) -> bool:
                     # Save into DB
                     object = Subtitles(time=time, word=word, video=getVideoObject(video_id) )
                     object.save()
+    print(lis)
+    video = getVideoObject(video_id)
+    print(video,"Video Name")
+    video.subtitles_data = "\n".join(lis)
+    video.save()
+    
     return True
    
 def getVideoObject(video_id)->Video:
+    
     
     video_id = str(video_id)
     video = Video.objects.filter(video_id__iexact=video_id)
     if video:
         return video.first()
-    
+    print(video_id, video)
     return None
 
 # Embed first subtitles track found into videos
@@ -156,29 +164,14 @@ def encodeVideoSubtitles(input_file: str, subtitles_fileName: str) -> str:
 
     print("Inside function")
     filename:str = input_file.split("/")[3]
-    output_file:str = f"assets/output_videos/output_{filename}"
+    output_file:str = f"assets/output_videos/output-{filename}"
     command = f"ffmpeg -i {input_file[1:]} -vf subtitles={subtitles_fileName} {output_file}"
 
-    try:
-        output = subprocess.run(
-            command, capture_output=True, shell=True, text=True)
-
-    except Exception as e:
-        print(e)
-    print(output.stdout, output.stderr, "Message")
+    output = subprocess.run(
+        command, capture_output=True, shell=True, text=True)
+    
     return filename
 
-
-def getVideoUrl(video_id:int)->str:
-
-    video_id = str(video_id)
-    data:str = Video.objects.filter(video_id__iexact=video_id)
-
-    if not data:
-        return ""
-
-    return data.first().video_file.url
-   
 # Celery Task
 @shared_task(bind=True)
 def process_video(self, url:str, video_id:str)->None:
@@ -186,12 +179,12 @@ def process_video(self, url:str, video_id:str)->None:
     cmd_output:str = checkSubtitlesStreams(url)
     streamCode:str = getAvailableSubtitles(cmd_output)
     subtitles_filename:str = convertToSrt(url, streamCode)
-    encodeVideoSubtitles(url, subtitles_filename)
-    print("encoding done")
     file_content:str = parse_srt(subtitles_filename)
     print("file reading done")
     saveSubtitlesDb(video_id ,file_content)
     print("subtitles saving done")
+    encodeVideoSubtitles(url, subtitles_filename)
+    print("encoding done")
     
     print("Task Completed")
     

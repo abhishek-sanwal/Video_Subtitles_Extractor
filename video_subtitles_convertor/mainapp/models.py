@@ -7,6 +7,7 @@ class Video(models.Model):
     
     video_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     video_file = models.FileField(upload_to="videos/")
+    subtitles_data = models.TextField(blank=True)
     
     def __str__(self):
         
