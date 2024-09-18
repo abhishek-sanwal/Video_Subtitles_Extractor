@@ -15,7 +15,7 @@
 ## Technologies Used:
 
 - Python3
-- Django Framework[4]
+- Django Framework
 - Celery
 - Redis
 - Postgres
@@ -64,7 +64,8 @@ docker-compose down
 
 ### Working Demo
 
-![Working Demo](/screenshots/Demo.mp4)
+- ![Working Demo](/screenshots/Demo.mp4)
+- [Online Video Player](https://streamable.com/hy7xku) will expire at 20 sep 2024.
 
 ---
 
@@ -129,7 +130,7 @@ docker-compose down
 
 - It will list video with input file along with subtitles.[Refresh the page if subtitles is not available]
 
-- Input file may get change if a duplicate file with same name exists in system.
+- Input filename may get change if a duplicate file with same name exists in system.It will assign some random string after that name. Check videos folder for that name.
 
 ---
 
