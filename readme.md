@@ -64,7 +64,7 @@ docker-compose down
 
 ### Working Demo
 
-![Working Demo](/screenshots/Demo.mp4)
+<!-- ![Working Demo](/screenshots/Demo.mp4) -->
 
 ---
 
@@ -136,9 +136,9 @@ docker-compose down
 #### Search Subtitles
 
 ![pic_1](/screenshots/Subtitles_search_1.png)
-![pic_2](/screenshots/Subtitles_search_2.png)
-![pic_3](/screenshots/Subtitles_search_3_1.png)
-![pic_4](/screenshots/Subtitles_search_3.png)
+![pic_2](/screenshots/Subtitles_Search_2.png)
+![pic_3](/screenshots/Subtitles_Search_3_1.png)
+![pic_4](/screenshots/Subtitles_Search_3.png)
 ![pic_5](/screenshots/Subtitles_Search_4.png)
 
 > We can use any word to search here. It will provide the timestamp of that word in all videos uploaded to website along with a button to play from that timestamp.
