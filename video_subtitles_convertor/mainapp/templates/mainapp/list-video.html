@@ -1,5 +1,7 @@
 <!-- Extend base html file -->
 {% extends 'mainapp/base.html' %}
+<!--  -->
+{% load custom_filters %}
 
 <!-- Customize title -->
 
@@ -20,7 +22,18 @@ Videos List
   {% for video in videos %}
 
   <!-- Render Video url -->
-  <li>{{ video.video_file.url }}</li>
+  <li>{{ video.video_file.url|getFileName }}</li>
+  <video
+    height="200px"
+    width="600px"
+    preload="auto"
+    style="margin-bottom: 30px; border: 4px solid black"
+    controls
+  >
+    <source src=" {{ video.video_file.url }} " type="video/mp4" />
+    <source src=" {{ video.video_file.url }} " type="video/ogg" />
+  </video>
+  <p>{{ video.subtitles_data }}</p>
 </ul>
 <!-- If no items -->
 {% empty %}
