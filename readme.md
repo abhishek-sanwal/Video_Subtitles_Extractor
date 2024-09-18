@@ -54,30 +54,68 @@ docker-compose down
 
 ```
 
-Pro tip: Use **Docker Debug** to visualize the containers and check the errors if any occurs. Sometime You may need to reload a particular container. Use Docker Desktop to reload that container instantly.
+**Pro tip**: Use **Docker Desktop Debug** to visualize the containers and check the errors if any occurs. Sometime You may need to reload a particular container. Use Docker Desktop to reload that container instantly.
 
-Sometimes Django will not be able to connect to postgres when you first spin the backend container. Postgres may take a longer time to setup so, just reload /refresh that container after db setup is completed it will work.
+> Sometimes Django will not be able to connect to postgres when you first spin the backend container. Postgres may take a longer time to setup so, just reload /refresh that container after db setup is completed it will work.
 
 ---
 
+### Working Demo
+
+![Working Demo](/screenshots/Demo.mp4)
+
+
+___
+
 ### Screenshots of working app
+
 
 #### Docker View
 
-[](/screenshots/Backend_Docker_View.png)
+![Picture](/screenshots/Backend_Docker_View.png)
 
 #### Backend Container
 
-[](/screenshots/Backend_Container.png)
+![Picture](/screenshots/Backend_Container.png)
 
 #### Celery
 
-[](/screenshots/Backend_Celery_View.png)
+![Picture](/screenshots/Backend_Celery_View.png)
 
 #### Redis
 
-[](/screenshots/Redis.png)
+![Picture](/screenshots/Redis.png)
 
-If you want to delete all models data at any moment of time you can't directly use admin panel as there will a lot of data so you can use **shell** or **dbshell** to quickly delete model.
+#### Postgres
 
-[You can use this command on backend container or in vscode](/screenshots/Backend_Delete_all_models_data.png)
+![Picture](/screenshots/Backend_Postgres_View.png)
+
+If you want to delete all models data at any moment of time you can't directly use admin panel as there will a lot of data it may take a longer time so you can use **shell** or **dbshell** to quickly delete model. Don't directly run delete command on postgres db.
+
+![You can use this command on backend container or in vscode](/screenshots/Backend_Delete_all_models_data.png)
+
+---
+
+#### Bugs:
+
+- Chrome Video Loading Issue :
+
+  > Sometimes, when we click on js button it will not forward/back video to that particular timestamp because video is not loaded fully yet.[Issue only for larger Videos]
+
+- Font tag appearing in subtitles:
+
+  > I have tried to use regular expressions to remove all html opening and closing tags from subtitles still it is messing up here and there. So, Used a workaround by using replace function. Will fix it sooner.
+
+---
+
+#### Upcoming Features:
+
+- CSS Design :
+
+  > User Interface work is still in progress.
+
+- Subtitle Language Selection option
+
+  > As of now, logic is to select first subtitle stream and encode it on video as closed captions. Users doesn't have an option to choose an language out of available subtitles tracks.
+
+---
