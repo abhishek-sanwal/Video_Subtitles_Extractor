@@ -54,6 +54,30 @@ docker-compose down
 
 ```
 
+Pro tip: Use **Docker Debug** to visualize the containers and check the errors if any occurs. Sometime You may need to reload a particular container. Use Docker Desktop to reload that container instantly.
+
+Sometimes Django will not be able to connect to postgres when you first spin the backend container. Postgres may take a longer time to setup so, just reload /refresh that container after db setup is completed it will work.
+
 ---
 
 ### Screenshots of working app
+
+#### Docker View
+
+[](/screenshots/Backend_Docker_View.png)
+
+#### Backend Container
+
+[](/screenshots/Backend_Container.png)
+
+#### Celery
+
+[](/screenshots/Backend_Celery_View.png)
+
+#### Redis
+
+[](/screenshots/Redis.png)
+
+If you want to delete all models data at any moment of time you can't directly use admin panel as there will a lot of data so you can use **shell** or **dbshell** to quickly delete model.
+
+[You can use this command on backend container or in vscode](/screenshots/Backend_Delete_all_models_data.png)
