@@ -65,7 +65,7 @@ docker-compose down
 ### Working Demo
 
 - ![Working Demo](/screenshots/Demo.mp4)
-- [Online Video Player](https://streamable.com/hy7xku) will expire at 20 sep 2024.
+- [Online Video Player](https://drive.google.com/file/d/1oNCSB5NWWnYozE5lnfS937Wlq-XIOW9v/view?usp=sharing)
 
 ---
 
