@@ -157,13 +157,9 @@ MEDIA_URL = '/assets/'
 MEDIA_ROOT = os.path.join(BASE_DIR,"assets")
 
 # Celery Configurations
-CELERY_BROKER_URL = config('CELERY_BROKER_URL') 
-CELERY_ACCEPT_CONTENT = config('CELERY_ACCEPT_CONTENT',cast=Csv())
-CELERY_RESULT_SERIALIZER = config('CELERY_RESULT_SERIALIZER')
-CELERY_TASK_SERIALIZER = config('CELERY_TASK_SERIALIZER') 
-CELERY_TIMEZONE = config('CELERY_TIMEZONE') 
-
-
-# Celery beat and backend configurations
-CELERY_RESULT_BACKEND = "django-db"
-CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
+broker_url = config('CELERY_BROKER_URL') 
+accept_content = config('CELERY_ACCEPT_CONTENT',cast=Csv())
+result_serializer = config('CELERY_RESULT_SERIALIZER')
+task_serializer = config('CELERY_TASK_SERIALIZER') 
+timezone = config('CELERY_TIMEZONE')
+result_backend = "django-db"
